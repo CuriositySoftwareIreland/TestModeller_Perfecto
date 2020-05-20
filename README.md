@@ -10,7 +10,7 @@ Open source repository of Java based selenium tests. For use with [TestModeller.
 3. Install ChromeDriver (this needs to match the version of chrome you will be executing your tests on) and make sure you add it to your system PATH.
 4. Install Maven - this is used to manage the build process of our automation framework.
 
-5. Register the code templates to Test Modeller.
+5. Register the code templates to Test Modeller following this [tutorial](https://curiositysoftware.ie/Resources/tutorials/ConfigureTMFramework.mp4)
 6. Copy generated page objects into the 'Framework\src\main\java\pages' directory. 
 7. Copy generated tests into the 'Framework\src\test\java\tests' directory.
 
