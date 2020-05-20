@@ -1,6 +1,8 @@
 # Java Selenium Framework for use with TestModeller.io and Perfecto
 Open source repository of Java based selenium tests. For use with [TestModeller.io](http://www.testmodeller.io) and [Perfecto](http://www.Perfecto.io)
 
+Follow along with this [Tutorial](https://testmodeller.io/tutorials/selenium-java/)
+
 **NOTE:** Targets Java 8 only out of the box.
 
 # Getting started
