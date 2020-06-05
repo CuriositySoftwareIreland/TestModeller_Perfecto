@@ -1,0 +1,80 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestAll" parallel="tests" thread-count="10">
+
+<listeners>
+    <listener class-name="reports.ReportiumTestListener"/>
+  </listeners>
+  <parameter name="takesScreenshot" value="true" />
+  <parameter name="screenshotOnError" value="true" />
+
+	<test name="Windows 10 tests" parallel="methods">
+		<parameter name="platformName" value="Windows" />
+		<parameter name="platformVersion" value="10" />
+		<parameter name="browserVersion" value="beta" />
+		<parameter name="browserName" value="Chrome" />
+		<parameter name="location" value="AP Sydney" />
+		<parameter name="resolution" value="1024x768" />
+		<classes>
+			<class name="tests.PerfectoFreeTrailRegistrationTest_DefaultProfile">
+			<!-- <methods>
+				<include name = "GoToUrlClickFreeTrialMovetoFirstnamePositiveEnterFirstNamePositiveEnterLastNamePositiveEnterPh1"></include>
+				
+			</methods>  -->
+			</class>
+			
+		</classes>
+	</test>
+	
+	 <test name="Mac tests" enabled="false">
+		<parameter name="platformName" value="Mac" />
+		<parameter name="platformVersion" value="macOS Mojave" />
+		<parameter name="browserVersion" value="12" />
+		<parameter name="browserName" value="Safari" />
+		<parameter name="location" value="NA-US-BOS" />
+		<parameter name="resolution" value="1024x768" />
+		<classes>
+			<class name="tests.PerfectoFreeTrailRegistrationTest_DefaultProfile">
+			 <methods>
+				<include name = "GoToUrlClickFreeTrialMovetoFirstnamePositiveEnterFirstNamePositiveEnterLastNamePositiveEnterPh1"></include>
+			</methods>
+			</class>
+			
+		</classes>
+	</test>
+	
+	<test name="Android tests" parallel="methods">
+		<parameter name="platformName" value="Android" />
+		<parameter name="browserName" value="Chrome" />
+		<parameter name="enableAppiumBehavior" value="true" />
+		<parameter name="useAppiumForWeb" value="true"/>
+		<classes>
+			<class name="tests.PerfectoFreeTrailRegistrationTest_DefaultProfile">
+			<!-- <methods>
+				<include name = "GoToUrlClickSigninPositiveEnterUsernameoremailaddressPositiveEnterPasswordForgotpassword1"></include>
+				<include name = "GoToUrlClickSigninPositiveEnterUsernameoremailaddressNegativeEnterPasswordForgotpassword2"></include>
+				
+			</methods> -->
+			</class>
+			
+		</classes>
+	</test>
+	
+	<test name="iOS tests" parallel="methods">
+		<parameter name="platformName" value="iOS" />
+		<parameter name="browserName" value="Safari"/>
+		<parameter name="model" value="iPhone-6"/>
+		<parameter name="useAppiumForWeb" value="true"/>
+		<classes>
+			<class name="tests.PerfectoFreeTrailRegistrationTest_DefaultProfile">
+			<!-- <methods>
+				
+				<include name = "GoToUrlClickSigninNegativeEnterUsernameoremailaddressPositiveEnterPasswordForgotpassword3"></include>
+				<include name = "GoToUrlClickSigninNegativeEnterUsernameoremailaddressPositiveEnterPasswordForgotpassword4"></include>
+			</methods> -->
+			</class>
+			
+		</classes>
+	</test> 
+
+</suite>
