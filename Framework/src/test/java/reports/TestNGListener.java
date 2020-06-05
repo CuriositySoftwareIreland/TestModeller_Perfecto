@@ -11,6 +11,7 @@ import ie.curiositysoftware.testmodeller.TestModellerSuite;
 import org.openqa.selenium.WebDriver;
 import org.testng.*;
 import tests.TestBase;
+import utilities.CapabilityLoader;
 import utilities.PropertiesLoader;
 import utilities.testmodeller.TestModellerLogger;
 
@@ -50,8 +51,7 @@ public class TestNGListener implements ITestListener, IClassListener {
 
     @Override
     public void onTestFailure(ITestResult testResult) {
-        Object testClass = testResult.getInstance();
-        WebDriver webDriver = ((TestBase) testClass).getDriver();
+        WebDriver webDriver = CapabilityLoader.getDriver();
 
         if(testResult.getThrowable() != null) {
             TestModellerLogger.FailStepWithScreenshot(webDriver, "Test Failed", testResult.getThrowable().getMessage());
@@ -73,9 +73,7 @@ public class TestNGListener implements ITestListener, IClassListener {
 
     @Override
     public void onTestSuccess(ITestResult testResult) {
-        Object testClass = testResult.getInstance();
-
-        WebDriver webDriver = ((TestBase) testClass).getDriver();
+        WebDriver webDriver = CapabilityLoader.getDriver();
 
         TestModellerLogger.PassStepWithScreenshot(webDriver, "Test Passed");
 
@@ -159,4 +157,22 @@ public class TestNGListener implements ITestListener, IClassListener {
 
         runningGeneratedTests = previousValue;
     }
+
+	@Override
+	public void onTestSkipped(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStart(ITestContext context) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -1,104 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>ie.curiositysoftware</groupId>
-    <artifactId>PerfectoSeleniumFramework</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.21.0</version>
+	<groupId>ie.curiositysoftware</groupId>
+	<artifactId>PerfectoSeleniumFramework</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.21.0</version>
 
-                    <configuration>
-                        <suiteXmlFiles>
-                            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                        </suiteXmlFiles>
-                    </configuration>
-                </plugin>
+					<configuration>
+						<suiteXmlFiles>
+							<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+						</suiteXmlFiles>
+					</configuration>
+				</plugin>
 
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                    </configuration>
-                </plugin>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
 
-            </plugins>
-        </pluginManagement>
-    </build>
+			</plugins>
+		</pluginManagement>
+	</build>
 
-    <properties>
-        <reportium-sdk.version>RELEASE</reportium-sdk.version>
-    </properties>
+	<properties>
+		<reportium-sdk.version>RELEASE</reportium-sdk.version>
+	</properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>3.11.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports-testng-adapter</artifactId>
-            <version>1.0.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports</artifactId>
-            <version>4.0.9</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>RELEASE</version>
+	<dependencies>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.59</version>
 		</dependency>
 
-        <dependency>
-            <groupId>ie.curiositysoftware</groupId>
-            <artifactId>testmodeller</artifactId>
-            <version>2.0.12</version>
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports-testng-adapter</artifactId>
+			<version>1.0.3</version>
+		</dependency>
 
-        </dependency>
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>4.0.9</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>RELEASE</version>
-        </dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>RELEASE</version>
+		</dependency>
 
-        <!-- Reporting SDK -->
-        <dependency>
-            <groupId>com.perfecto.reporting-sdk</groupId>
-            <artifactId>reportium-java</artifactId>
-            <version>${reportium-sdk.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>ie.curiositysoftware</groupId>
+			<artifactId>testmodeller</artifactId>
+			<version>2.0.12</version>
 
-        <!-- Reporting SDK addition for Allure users -->
-        <dependency>
-            <groupId>com.perfecto.reporting-sdk</groupId>
-            <artifactId>reportium-allure-integration</artifactId>
-            <version>${reportium-sdk.version}</version>
-        </dependency>
-    </dependencies>
+		</dependency>
 
-    <repositories>
-        <!-- Perfecto Repository -->
-        <repository>
-            <id>perfectomobile</id>
-            <name>Perfecto mobile</name>
-            <url>https://repo1.perfectomobile.com/public/repositories/maven</url>
-        </repository>
-    </repositories>
+		<!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+		<dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>6.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.10</version>
+		</dependency>
+
+		<!-- Reporting SDK -->
+		<dependency>
+			<groupId>com.perfecto.reporting-sdk</groupId>
+			<artifactId>reportium-java</artifactId>
+			<version>${reportium-sdk.version}</version>
+		</dependency>
+
+		<!-- Reporting SDK addition for Allure users -->
+		<dependency>
+			<groupId>com.perfecto.reporting-sdk</groupId>
+			<artifactId>reportium-allure-integration</artifactId>
+			<version>${reportium-sdk.version}</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<!-- Perfecto Repository -->
+		<repository>
+			<id>perfectomobile</id>
+			<name>Perfecto mobile</name>
+			<url>https://repo1.perfectomobile.com/public/repositories/maven</url>
+		</repository>
+	</repositories>
 
 
 </project>

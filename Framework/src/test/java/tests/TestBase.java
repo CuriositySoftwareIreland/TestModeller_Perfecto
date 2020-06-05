@@ -1,38 +1,40 @@
 package tests;
 
-import com.perfecto.reportium.test.TestContext;
 import utilities.CapabilityLoader;
 import utilities.PropertiesLoader;
 import utilities.reports.ExtentReportManager;
-import ie.curiositysoftware.allocation.dto.AllocationType;
-import ie.curiositysoftware.allocation.engine.DataAllocation;
-import ie.curiositysoftware.allocation.engine.DataAllocationEngine;
-import ie.curiositysoftware.jobengine.services.ConnectionProfile;
-import org.openqa.selenium.WebDriver;
-import org.testng.ITestContext;
-import org.testng.ITestNGMethod;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+
 import utilities.reports.ReportiumReportManager;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.ITestContext;
+import org.testng.ITestNGMethod;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+
+import com.perfecto.reportium.test.TestContext;
+import com.perfecto.reportium.test.result.TestResultFactory;
+
+import ie.curiositysoftware.allocation.dto.AllocationType;
+import ie.curiositysoftware.allocation.engine.DataAllocation;
+import ie.curiositysoftware.allocation.engine.DataAllocationEngine;
+import ie.curiositysoftware.jobengine.services.ConnectionProfile;
+
+
 public class TestBase {
     /********** Replace with your own details ***********/
-    protected WebDriver driver;
+    
+    private Method method;
 
     protected ConnectionProfile cp = new ConnectionProfile(PropertiesLoader.getProperties().getProperty("testModeller.apiHost"), PropertiesLoader.getProperties().getProperty("testModeller.apiKey"));
 
     protected DataAllocationEngine dataAllocationEngine = new DataAllocationEngine(cp);
-
-    public WebDriver getDriver()
-    {
-        return driver;
-    }
 
     @BeforeSuite(alwaysRun = true)
     public void setupReporter()
@@ -76,21 +78,31 @@ public class TestBase {
     }
 
     @BeforeMethod(alwaysRun = true)
-    public void initDriver(Method method)
+    public void initDriver(ITestContext test) throws Exception
     {
         ExtentReportManager.createNewTest(method);
-
-        driver = CapabilityLoader.createWebDriver();
-
-        ReportiumReportManager.initalise(driver);
-
-        ReportiumReportManager.reportiumClient.testStart(method.getName(), new TestContext("Sanity"));
+        new CapabilityLoader().createWebDriver(test);
+        if((!test.getCurrentXmlTest().getParameter("platformName").equalsIgnoreCase("ios"))&&(!test.getCurrentXmlTest().getParameter("platformName").equalsIgnoreCase("android"))) {
+        	CapabilityLoader.getDriver().manage().window().maximize();
+        }
+        new ReportiumReportManager().initalise(CapabilityLoader.getDriver(), test);
+        
     }
+    
+    @BeforeMethod(alwaysRun=true)
+    public void getMethodName(Method method) {
+		this.method = method;
+	}
 
     @AfterMethod(alwaysRun = true)
-    public void closerDriver()
+    public void closerDriver(ITestResult result)
     {
-        driver.quit();
+//    	if(result.isSuccess()) {
+//    		ReportiumReportManager.getReportiumClient().testStop(TestResultFactory.createSuccess());
+//    	}else {
+//    		ReportiumReportManager.getReportiumClient().testStop(TestResultFactory.createFailure(result.getThrowable().toString(), result.getThrowable(), ""));
+//    	}
+        CapabilityLoader.getDriver().quit();
     }
 
     @AfterSuite

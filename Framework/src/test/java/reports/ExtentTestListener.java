@@ -1,6 +1,7 @@
 package reports;
 
 import tests.TestBase;
+import utilities.CapabilityLoader;
 import utilities.reports.ExtentReportManager;
 import utilities.testmodeller.GetScreenShot;
 import com.aventstack.extentreports.Status;
@@ -10,13 +11,14 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 public class ExtentTestListener extends TestBase implements ITestListener {
+	
     private static String getTestMethodName(ITestResult iTestResult) {
         return iTestResult.getMethod().getConstructorOrMethod().getName();
     }
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        iTestContext.setAttribute("WebDriver", this.driver);
+        iTestContext.setAttribute("WebDriver", CapabilityLoader.getDriver());
     }
 
     @Override
@@ -31,8 +33,7 @@ public class ExtentTestListener extends TestBase implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        Object testClass = iTestResult.getInstance();
-        WebDriver webDriver = ((TestBase) testClass).getDriver();
+        WebDriver webDriver = CapabilityLoader.getDriver();
         ExtentReportManager.passStepWithScreenshot(webDriver, "Test Passed");
 
         ExtentReportManager.extentTest.log(Status.PASS, "Test Passed");
@@ -40,8 +41,7 @@ public class ExtentTestListener extends TestBase implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        Object testClass = iTestResult.getInstance();
-        WebDriver webDriver = ((TestBase) testClass).getDriver();
+        WebDriver webDriver = CapabilityLoader.getDriver();
         ExtentReportManager.failStepWithScreenshot(webDriver, "Test Failure");
 
         //ExtentReports log and screenshot operations for failed tests.

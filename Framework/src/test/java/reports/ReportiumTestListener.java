@@ -1,24 +1,19 @@
 package reports;
 
-import com.aventstack.extentreports.Status;
-import com.perfecto.reportium.test.TestContext;
-import com.perfecto.reportium.test.result.TestResultFactory;
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+
+import com.perfecto.reportium.test.TestContext;
+import com.perfecto.reportium.test.result.TestResultFactory;
+
 import tests.TestBase;
-import utilities.reports.ExtentReportManager;
 import utilities.reports.ReportiumReportManager;
 
 public class ReportiumTestListener extends TestBase implements ITestListener {
-    private static String getTestMethodName(ITestResult iTestResult) {
-        return iTestResult.getMethod().getConstructorOrMethod().getName();
-    }
 
     @Override
     public void onStart(ITestContext iTestContext) {
-
 
     }
 
@@ -29,18 +24,25 @@ public class ReportiumTestListener extends TestBase implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-
+    	String tags = "Sanity";
+    	try {
+			if(System.getProperty("reportium-tags")!= null || (!System.getProperty("reportium-tags").equals(""))) {
+				tags = System.getProperty("reportium-tags").toString();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	ReportiumReportManager.getReportiumClient().testStart(iTestResult.getMethod().getMethodName(), new TestContext(tags));
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        ReportiumReportManager.reportiumClient.testStop(TestResultFactory.createSuccess());
-
+    	ReportiumReportManager.getReportiumClient().testStop(TestResultFactory.createSuccess());
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        ReportiumReportManager.reportiumClient.testStop(TestResultFactory.createFailure(iTestResult.getThrowable().toString(), iTestResult.getThrowable(), ""));
+    	ReportiumReportManager.getReportiumClient().testStop(TestResultFactory.createFailure(iTestResult.getThrowable().getMessage(), iTestResult.getThrowable()));
     }
 
     @Override
